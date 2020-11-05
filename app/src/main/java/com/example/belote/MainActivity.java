@@ -2,6 +2,7 @@ package com.example.belote;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,14 +13,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
+DatabaseReference reff ;
+Games games ;
+ int i ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        Random rand = new Random();
+
+
+
         Button belote = findViewById(R.id.belote);
         Button capote = findViewById(R.id.capote);
         Button daklet = findViewById(R.id.daklet);
@@ -29,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Button newgame = findViewById(R.id.newgame);
         TextView totale = findViewById(R.id.total);
         TextView totaleE = findViewById(R.id.totalE);
+        TextView id = findViewById(R.id.id);
         EditText score = findViewById(R.id.score);
         ArrayList<Integer> scoreT1 = new ArrayList<>();
         ArrayList<Integer> scoreT2 = new ArrayList<>();
@@ -43,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                 scoreT2.add(0);
                 totale.setText("");
                 totaleE.setText("");
+                i=rand.nextInt(9999999);
+                id.setText(String.valueOf(i));
+
 
             }
         });
@@ -162,5 +179,14 @@ public class MainActivity extends AppCompatActivity {
         }
         return ch;
 
+    }
+
+//toDo finsh this update
+    public void uptodate(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference gameRef = database.getReference("games/"+"1");
+        String string1 =database.getReference("games/"+"1/"+"string1").getKey();
+        String string2 =database.getReference("games/"+"1/"+"string2").getKey();
+        Log.d("mes" , "string1: "+string1+"\n"+"string2: "+string2);
     }
 }

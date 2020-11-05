@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "578957797270",
+    "firebase_url": "https://belote-6d4bc.firebaseio.com",
+    "project_id": "belote-6d4bc",
+    "storage_bucket": "belote-6d4bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578957797270:android:5672bb9612d265429c9fb7",
+        "android_client_info": {
+          "package_name": "com.example.belote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578957797270-5rd9pafbgj5a7onj7ck8qc1mb1pt61nj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.belote",
+            "certificate_hash": "a3f4e86a73f6d6276bf2ba45604178d54829aeb2"
+          }
+        },
+        {
+          "client_id": "578957797270-npfsb8vj2akstla4rrs6h4lg0a6urrs6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnVW2sNh_wi03mLR6_IBByVTlYOIcweRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578957797270-npfsb8vj2akstla4rrs6h4lg0a6urrs6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

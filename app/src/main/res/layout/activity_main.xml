@@ -25,6 +25,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
         android:text="500pt"
         app:backgroundTint="#3F51B5"
         app:layout_constraintBottom_toTopOf="@+id/daklet"
@@ -62,12 +63,12 @@
         android:id="@+id/capoteE"
         android:layout_width="86dp"
         android:layout_height="44dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:text="500PT"
         app:backgroundTint="#4CAF50"
         app:layout_constraintBottom_toTopOf="@+id/dakletE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintHorizontal_bias="0.83"
         app:layout_constraintStart_toEndOf="@+id/divider" />
 
     <Button
@@ -100,7 +101,7 @@
         app:backgroundTint="#4CAF50"
         app:layout_constraintBottom_toTopOf="@+id/capoteE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toEndOf="@+id/divider" />
 
     <Button
@@ -141,13 +142,13 @@
         android:id="@+id/newgame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="72dp"
         android:background="#F4363C"
         android:text="new"
         app:backgroundTint="#DC0A0A"
         app:layout_constraintBottom_toTopOf="@+id/beloteE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.828"
+        app:layout_constraintHorizontal_bias="0.846"
         app:layout_constraintStart_toEndOf="@+id/divider" />
 
     <TextView
@@ -171,5 +172,17 @@
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="94dp"
+        android:layout_height="38dp"
+        android:paddingBottom="4dp"
+        android:textColor="#FF0000"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/newgame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.822"
+        app:layout_constraintStart_toEndOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
