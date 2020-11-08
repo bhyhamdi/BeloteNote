@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 scoreT2.add(0);
                 totale.setText("");
                 totaleE.setText("");
-                i = rand.nextInt(9999);
+                i = rand.nextInt(999);
                 id.setText(String.valueOf(i));
                 HashMap hashMap = new HashMap();
 
@@ -77,11 +77,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast toast = Toast.makeText(MainActivity.this, "added", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast toast = Toast.makeText(MainActivity.this, "erreur to added", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 });
 
@@ -92,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 2);
-                totale.setText("");
-                totale.append(affiche(scoreT1));
+                totale.setText(affiche(scoreT1));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score1", affiche(scoreT1));
                 reff.child("game" + i).updateChildren(hashMap);
@@ -105,8 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 2);
-                totaleE.setText("");
-                totaleE.append(affiche(scoreT2));
+                totaleE.setText(affiche(scoreT2));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score2", affiche(scoreT2));
                 reff.child("game" + i).updateChildren(hashMap);
@@ -116,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 50);
-                totale.setText("");
-                totale.append(affiche(scoreT1));
+                totale.setText(affiche(scoreT1));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score1", affiche(scoreT1));
                 reff.child("game" + i).updateChildren(hashMap);
@@ -128,8 +127,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 50);
-                totaleE.setText("");
-                totaleE.append(affiche(scoreT2));
+                totaleE.setText(affiche(scoreT2));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score2", affiche(scoreT2));
                 reff.child("game" + i).updateChildren(hashMap);
@@ -140,8 +138,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 16);
-                totale.setText("");
-                totale.append(affiche(scoreT1));
+                totale.setText(affiche(scoreT1));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score1", affiche(scoreT1));
                 reff.child("game" + i).updateChildren(hashMap);
@@ -151,8 +148,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 16);
-                totaleE.setText("");
-                totaleE.append(affiche(scoreT2));
+                totaleE.setText(affiche(scoreT2));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score2", affiche(scoreT2));
                 reff.child("game" + i).updateChildren(hashMap);
@@ -166,11 +162,9 @@ public class MainActivity extends AppCompatActivity {
                 int scoreAdded = Integer.parseInt(score.getText().toString());
                 if (scoreAdded < 0) {
                     scoreT1.add(scoreT1.get(scoreT1.size() - 1) + scoreAdded * -1);
-                    totale.setText("");
-                    totale.append(affiche(scoreT1));
+                    totale.setText(affiche(scoreT1));
                     scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 17 - (scoreAdded * -1));
-                    totaleE.setText("");
-                    totaleE.append(affiche(scoreT2));
+                    totaleE.setText(affiche(scoreT2));
                     score.setText("");
                     HashMap hashMap = new HashMap();
                     hashMap.put("score1", affiche(scoreT1));
@@ -179,11 +173,9 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     scoreT1.add(scoreT1.get(scoreT1.size() - 1) + scoreAdded);
-                    totale.setText("");
-                    totale.append(affiche(scoreT1));
+                    totale.setText(affiche(scoreT1));
                     scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 16 - (scoreAdded));
-                    totaleE.setText("");
-                    totaleE.append(affiche(scoreT2));
+                    totaleE.setText(affiche(scoreT2));
                     score.setText("");
                     HashMap hashMap = new HashMap();
                     hashMap.put("score1", affiche(scoreT1));
@@ -195,7 +187,29 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    totale.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            scoreT1.remove(scoreT1.size()-1);
+            totale.setText(affiche(scoreT1));
+            HashMap hashMap = new HashMap();
+            hashMap.put("score1", affiche(scoreT1));
+            reff.child("game" + i).updateChildren(hashMap);
 
+            return false;
+        }
+    });
+    totaleE.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            scoreT2.remove(scoreT2.size()-1);
+            totaleE.setText(affiche(scoreT2));
+            HashMap hashMap = new HashMap();
+            hashMap.put("score2", affiche(scoreT2));
+            reff.child("game" + i).updateChildren(hashMap);
+            return false;
+        }
+    });
     }
 
 
