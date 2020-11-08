@@ -1,36 +1,38 @@
 package com.example.belote;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ServiceConnection;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-DatabaseReference reff ;
-Games games ;
- int i ;
+
+    public static Games games;
+    DatabaseReference reff;
+    int i;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         Random rand = new Random();
-
 
 
         Button belote = findViewById(R.id.belote);
@@ -48,6 +50,14 @@ Games games ;
         ArrayList<Integer> scoreT2 = new ArrayList<>();
         scoreT1.add(0);
         scoreT2.add(0);
+        reff = FirebaseDatabase.getInstance().getReference().child("Games");
+        newgame.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                openStream();
+                return false;
+            }
+        });
         newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,8 +67,23 @@ Games games ;
                 scoreT2.add(0);
                 totale.setText("");
                 totaleE.setText("");
-                i=rand.nextInt(9999999);
+                i = rand.nextInt(9999);
                 id.setText(String.valueOf(i));
+                HashMap hashMap = new HashMap();
+
+                hashMap.put("score1", "0");
+                hashMap.put("score2", "0");
+                reff.child("game" + i).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast toast = Toast.makeText(MainActivity.this, "added", Toast.LENGTH_SHORT);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast toast = Toast.makeText(MainActivity.this, "erreur to added", Toast.LENGTH_SHORT);
+                    }
+                });
 
 
             }
@@ -69,6 +94,11 @@ Games games ;
                 scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 2);
                 totale.setText("");
                 totale.append(affiche(scoreT1));
+                HashMap hashMap = new HashMap();
+                hashMap.put("score1", affiche(scoreT1));
+                reff.child("game" + i).updateChildren(hashMap);
+
+
             }
         });
         beloteE.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +107,9 @@ Games games ;
                 scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 2);
                 totaleE.setText("");
                 totaleE.append(affiche(scoreT2));
+                HashMap hashMap = new HashMap();
+                hashMap.put("score2", affiche(scoreT2));
+                reff.child("game" + i).updateChildren(hashMap);
             }
         });
         capote.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +118,9 @@ Games games ;
                 scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 50);
                 totale.setText("");
                 totale.append(affiche(scoreT1));
+                HashMap hashMap = new HashMap();
+                hashMap.put("score1", affiche(scoreT1));
+                reff.child("game" + i).updateChildren(hashMap);
 
             }
         });
@@ -94,6 +130,9 @@ Games games ;
                 scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 50);
                 totaleE.setText("");
                 totaleE.append(affiche(scoreT2));
+                HashMap hashMap = new HashMap();
+                hashMap.put("score2", affiche(scoreT2));
+                reff.child("game" + i).updateChildren(hashMap);
 
             }
         });
@@ -103,6 +142,9 @@ Games games ;
                 scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 16);
                 totale.setText("");
                 totale.append(affiche(scoreT1));
+                HashMap hashMap = new HashMap();
+                hashMap.put("score1", affiche(scoreT1));
+                reff.child("game" + i).updateChildren(hashMap);
             }
         });
         dakletE.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +153,9 @@ Games games ;
                 scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 16);
                 totaleE.setText("");
                 totaleE.append(affiche(scoreT2));
+                HashMap hashMap = new HashMap();
+                hashMap.put("score2", affiche(scoreT2));
+                reff.child("game" + i).updateChildren(hashMap);
 
             }
         });
@@ -127,6 +172,10 @@ Games games ;
                     totaleE.setText("");
                     totaleE.append(affiche(scoreT2));
                     score.setText("");
+                    HashMap hashMap = new HashMap();
+                    hashMap.put("score1", affiche(scoreT1));
+                    hashMap.put("score2", affiche(scoreT2));
+                    reff.child("game" + i).updateChildren(hashMap);
 
                 } else {
                     scoreT1.add(scoreT1.get(scoreT1.size() - 1) + scoreAdded);
@@ -136,6 +185,10 @@ Games games ;
                     totaleE.setText("");
                     totaleE.append(affiche(scoreT2));
                     score.setText("");
+                    HashMap hashMap = new HashMap();
+                    hashMap.put("score1", affiche(scoreT1));
+                    hashMap.put("score2", affiche(scoreT2));
+                    reff.child("game" + i).updateChildren(hashMap);
 
                 }
 
@@ -156,7 +209,6 @@ Games games ;
         }
         if (liste.size() <= 18) {
             for (int i = 1; i < liste.size(); i++) {
-                Log.d("liste", liste.get(i).toString() + "**");
                 if (liste.get(i - 1) > liste.get(i)) {
                     ch = ch + "---" + "\n";
                     ch = ch + liste.get(i).toString() + "\n";
@@ -166,7 +218,6 @@ Games games ;
             }
         } else {
             for (int i = liste.size() - 18; i < liste.size(); i++) {
-                Log.d("liste", liste.get(i).toString() + "**");
                 if (liste.get(i - 1) > liste.get(i)) {
                     ch = ch + "---" + "\n";
                     ch = ch + liste.get(i).toString() + "\n";
@@ -181,12 +232,10 @@ Games games ;
 
     }
 
-//toDo finsh this update
-    public void uptodate(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference gameRef = database.getReference("games/"+"1");
-        String string1 =database.getReference("games/"+"1/"+"string1").getKey();
-        String string2 =database.getReference("games/"+"1/"+"string2").getKey();
-        Log.d("mes" , "string1: "+string1+"\n"+"string2: "+string2);
+    //Do finsh this update
+    public void openStream() {
+        Intent intent = new Intent(this, stream.class);
+        startActivity(intent);
+
     }
 }
