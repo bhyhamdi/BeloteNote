@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         capote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 50);
+                scoreT1.add(scoreT1.get(scoreT1.size() - 1) + 25);
                 totale.setText(affiche(scoreT1));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score1", affiche(scoreT1));
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         capoteE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 50);
+                scoreT2.add(scoreT2.get(scoreT2.size() - 1) + 25);
                 totaleE.setText(affiche(scoreT2));
                 HashMap hashMap = new HashMap();
                 hashMap.put("score2", affiche(scoreT2));
