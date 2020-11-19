@@ -27,7 +27,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="8dp"
-        android:text="500pt"
+        android:text="250pt"
         app:backgroundTint="#3F51B5"
         app:layout_constraintBottom_toTopOf="@+id/daklet"
         app:layout_constraintStart_toStartOf="parent" />
@@ -66,7 +66,7 @@
         android:layout_width="86dp"
         android:layout_height="44dp"
         android:layout_marginBottom="8dp"
-        android:text="500PT"
+        android:text="250PT"
         app:backgroundTint="#4CAF50"
         app:layout_constraintBottom_toTopOf="@+id/dakletE"
         app:layout_constraintEnd_toEndOf="parent"
